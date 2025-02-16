@@ -15,6 +15,7 @@ import {
 } from '~/testing/mock-data/companiesWithRelations';
 import { generatedMockObjectMetadataItems } from '~/testing/mock-data/generatedMockObjectMetadataItems';
 import {
+  allMockPersonRecords,
   getMockPersonObjectMetadataItem,
   getMockPersonRecord,
 } from '~/testing/mock-data/people';
@@ -106,6 +107,9 @@ describe('useDeleteOneRecord', () => {
         assertCachedRecordMatchSnapshot({
           recordId: personRecord.id,
           objectMetadataItem: personObjectMetadataItem,
+          matchObject: {
+            deletedAt: expect.any(String),
+          },
         });
         assertCachedRecordMatchSnapshot({
           objectMetadataItem: companyObjectMetadataItem,
