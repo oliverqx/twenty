@@ -202,7 +202,7 @@ describe('useDeleteOneRecord', () => {
         },
         {
           objectMetadataItem: personObjectMetadataItem,
-          records: allMockCompanyRecordsWithRelation,
+          records: allMockPersonRecords,
         },
       ],
     });

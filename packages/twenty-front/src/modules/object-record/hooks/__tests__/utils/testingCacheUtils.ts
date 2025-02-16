@@ -84,8 +84,9 @@ export const buildCacheUtils = ({
   populateRecordsInCache(recordsTopPopulateInCache);
   const initialStateExtract = cache.extract();
   cache.reset;
-  const restoreCacheToInitialState = async () =>
+  const restoreCacheToInitialState = async () => {
     cache.restore(initialStateExtract);
+  };
 
   return {
     assertCachedRecordIsNull,
