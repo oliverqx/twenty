@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useDeleteOneRecord A. Starting from empty cache 1. Should successfully delete record and update record cache entry 1`] = `
+{
+  "__typename": "Person",
+  "deletedAt": "2024-02-14T09:45:00Z",
+  "id": "da3c2c4b-da01-4b81-9734-226069eb4cd0",
+}
+`;
+
+exports[`useDeleteOneRecord B. Starting from filled cache 1. Should handle successfull record deletion 1`] = `
+{
+  "__typename": "Person",
+  "deletedAt": "2024-02-14T09:45:00Z",
+  "id": "da3c2c4b-da01-4b81-9734-226069eb4cd0",
+}
+`;
+
+exports[`useDeleteOneRecord B. Starting from filled cache 1. Should handle successfull record deletion 2`] = `
+{
+  "__typename": "Company",
+  "accountOwner": null,
+  "address": {
+    "__typename": "Address",
+    "addressCity": "Dublin",
+    "addressCountry": "Ireland",
+    "addressLat": null,
+    "addressLng": null,
+    "addressPostcode": null,
+    "addressState": null,
+    "addressStreet1": "Eutaw Street",
+    "addressStreet2": null,
+  },
+  "createdAt": "2025-02-16T08:21:51.715Z",
+  "createdBy": {
+    "__typename": "Actor",
+    "context": {},
+    "name": "Tim Apple",
+    "source": "MANUAL",
+    "workspaceMemberId": "20202020-0687-4c41-b707-ed1bfca972a7",
+  },
+  "deletedAt": null,
+  "domainName": {
+    "__typename": "Links",
+    "primaryLinkLabel": "",
+    "primaryLinkUrl": "https://linkedin.com",
+    "secondaryLinks": [],
+  },
+  "employees": null,
+  "id": "20202020-3ec3-4fe3-8997-b76aa0bfa408",
+  "linkedinLink": {
+    "__typename": "Links",
+    "primaryLinkLabel": "",
+    "primaryLinkUrl": "",
+    "secondaryLinks": [],
+  },
+  "name": "Linkedin",
+  "noteTargets": [],
+  "opportunities": [
+    {},
+  ],
+  "people": [
+    {},
+    {},
+  ],
+  "position": 1,
+  "taskTargets": [],
+}
+`;
