@@ -8,13 +8,13 @@ describe('createOne', () => {
   describe('FieldMetadataService name/label sync', () => {
     let listingObjectId = '';
 
-    beforeAll(async () => {
+    beforeEach(async () => {
       const { objectMetadataId: createdObjectId } =
         await createListingCustomObject();
 
       listingObjectId = createdObjectId;
     });
-    afterAll(async () => {
+    afterEach(async () => {
       await deleteOneObjectMetadataItem(listingObjectId);
     });
     it('should create a field when name and label are synced correctly', async () => {
