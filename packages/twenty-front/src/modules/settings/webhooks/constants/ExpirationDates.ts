@@ -1,4 +1,4 @@
-import { NEVER_EXPIRE_DELTA_IN_YEARS } from '@/settings/developers/constants/NeverExpireDeltaInYears';
+import { NEVER_EXPIRE_DELTA_IN_YEARS } from '@/settings/webhooks/constants/NeverExpireDeltaInYears';
 
 export const EXPIRATION_DATES: {
   value: number | null;

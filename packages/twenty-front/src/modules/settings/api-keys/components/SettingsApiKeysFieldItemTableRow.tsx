@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { IconChevronRight, MOBILE_VIEWPORT } from 'twenty-ui';
 
-import { ApiFieldItem } from '@/settings/developers/types/api-key/ApiFieldItem';
+import { ApiFieldItem } from '@/settings/api-keys/types/ApiFieldItem';
 import { TableCell } from '@/ui/layout/table/components/TableCell';
 import { TableRow } from '@/ui/layout/table/components/TableRow';
 

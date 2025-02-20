@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 
 import { CoreObjectNameSingular } from '@/object-metadata/types/CoreObjectNameSingular';
 import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
-import { SettingsDevelopersWebhookTableRow } from '@/settings/developers/components/SettingsDevelopersWebhookTableRow';
-import { Webhook } from '@/settings/developers/types/webhook/Webhook';
+import { SettingsDevelopersWebhookTableRow } from '@/settings/webhooks/components/SettingsDevelopersWebhookTableRow';
+import { Webhook } from '@/settings/webhooks/types/Webhook';
 import { Table } from '@/ui/layout/table/components/Table';
 import { TableBody } from '@/ui/layout/table/components/TableBody';
 import { TableHeader } from '@/ui/layout/table/components/TableHeader';

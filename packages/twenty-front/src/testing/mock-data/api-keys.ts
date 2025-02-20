@@ -1,4 +1,4 @@
-import { ApiKey } from '@/settings/developers/types/api-key/ApiKey';
+import { ApiKey } from '@/settings/api-keys/types/ApiKey';
 
 type MockedApiKey = Pick<
   ApiKey,

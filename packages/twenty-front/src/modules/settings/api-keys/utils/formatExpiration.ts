@@ -1,9 +1,9 @@
 import { isNonEmptyString } from '@sniptt/guards';
 import { DateTime } from 'luxon';
 
-import { NEVER_EXPIRE_DELTA_IN_YEARS } from '@/settings/developers/constants/NeverExpireDeltaInYears';
-import { ApiFieldItem } from '@/settings/developers/types/api-key/ApiFieldItem';
-import { ApiKey } from '@/settings/developers/types/api-key/ApiKey';
+import { ApiFieldItem } from '@/settings/api-keys/types/ApiFieldItem';
+import { ApiKey } from '@/settings/api-keys/types/ApiKey';
+import { NEVER_EXPIRE_DELTA_IN_YEARS } from '@/settings/webhooks/constants/NeverExpireDeltaInYears';
 import { beautifyDateDiff } from '~/utils/date-utils';
 
 export const doesNeverExpire = (expiresAt: string) => {

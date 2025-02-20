@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { ComponentDecorator } from 'twenty-ui';
 
-import { ApiKeyInput } from '@/settings/developers/components/ApiKeyInput';
+import { ApiKeyInput } from '@/settings/api-keys/components/ApiKeyInput';
 import { SnackBarDecorator } from '~/testing/decorators/SnackBarDecorator';
 
 const meta: Meta<typeof ApiKeyInput> = {

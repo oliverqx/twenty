@@ -1,9 +1,9 @@
 import { CoreObjectNameSingular } from '@/object-metadata/types/CoreObjectNameSingular';
 import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
-import { SettingsApiKeysFieldItemTableRow } from '@/settings/developers/components/SettingsApiKeysFieldItemTableRow';
-import { ApiFieldItem } from '@/settings/developers/types/api-key/ApiFieldItem';
-import { ApiKey } from '@/settings/developers/types/api-key/ApiKey';
-import { formatExpirations } from '@/settings/developers/utils/formatExpiration';
+import { SettingsApiKeysFieldItemTableRow } from '@/settings/api-keys/components/SettingsApiKeysFieldItemTableRow';
+import { ApiFieldItem } from '@/settings/api-keys/types/ApiFieldItem';
+import { ApiKey } from '@/settings/api-keys/types/ApiKey';
+import { formatExpirations } from '@/settings/api-keys/utils/formatExpiration';
 import { Table } from '@/ui/layout/table/components/Table';
 import { TableBody } from '@/ui/layout/table/components/TableBody';
 import { TableHeader } from '@/ui/layout/table/components/TableHeader';

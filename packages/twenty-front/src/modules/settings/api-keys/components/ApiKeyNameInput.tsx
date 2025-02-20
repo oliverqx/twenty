@@ -4,7 +4,7 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { CoreObjectNameSingular } from '@/object-metadata/types/CoreObjectNameSingular';
 import { useUpdateOneRecord } from '@/object-record/hooks/useUpdateOneRecord';
-import { ApiKey } from '@/settings/developers/types/api-key/ApiKey';
+import { ApiKey } from '@/settings/api-keys/types/ApiKey';
 import { TextInput } from '@/ui/input/components/TextInput';
 import { isDefined } from 'twenty-shared';
 

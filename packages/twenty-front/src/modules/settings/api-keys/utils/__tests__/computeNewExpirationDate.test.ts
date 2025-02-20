@@ -1,4 +1,4 @@
-import { computeNewExpirationDate } from '@/settings/developers/utils/computeNewExpirationDate';
+import { computeNewExpirationDate } from '@/settings/api-keys/utils/computeNewExpirationDate';
 
 jest.useFakeTimers().setSystemTime(new Date('2024-01-01T00:00:00.000Z'));
 

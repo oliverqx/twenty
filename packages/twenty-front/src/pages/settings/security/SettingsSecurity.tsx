@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { H2Title, IconLock, Section, Tag } from 'twenty-ui';
 
+import { SettingsReadDocumentationButton } from '@/settings/api-keys/components/SettingsReadDocumentationButton';
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
-import { SettingsReadDocumentationButton } from '@/settings/developers/components/SettingsReadDocumentationButton';
 import { SettingsSSOIdentitiesProvidersListCard } from '@/settings/security/components/SettingsSSOIdentitiesProvidersListCard';
 import { SettingsSecurityOptionsList } from '@/settings/security/components/SettingsSecurityOptionsList';
 import { SettingsPath } from '@/types/SettingsPath';

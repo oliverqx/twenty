@@ -4,11 +4,11 @@ import { H2Title, Section } from 'twenty-ui';
 
 import { CoreObjectNameSingular } from '@/object-metadata/types/CoreObjectNameSingular';
 import { useCreateOneRecord } from '@/object-record/hooks/useCreateOneRecord';
+import { apiKeyTokenFamilyState } from '@/settings/api-keys/states/apiKeyTokenFamilyState';
+import { ApiKey } from '@/settings/api-keys/types/ApiKey';
 import { SaveAndCancelButtons } from '@/settings/components/SaveAndCancelButtons/SaveAndCancelButtons';
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
-import { EXPIRATION_DATES } from '@/settings/developers/constants/ExpirationDates';
-import { apiKeyTokenFamilyState } from '@/settings/developers/states/apiKeyTokenFamilyState';
-import { ApiKey } from '@/settings/developers/types/api-key/ApiKey';
+import { EXPIRATION_DATES } from '@/settings/webhooks/constants/ExpirationDates';
 import { SettingsPath } from '@/types/SettingsPath';
 import { Select } from '@/ui/input/components/Select';
 import { TextInput } from '@/ui/input/components/TextInput';
