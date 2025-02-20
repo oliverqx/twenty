@@ -53,9 +53,9 @@ const jestConfig: JestConfigWithTsJest = {
     'twenty-emails': '<rootDir>/../twenty-emails/dist/index.js',
     'twenty-shared': '<rootDir>/../twenty-shared/dist/index.js',
   },
-  // fakeTimers: {
-  //   enableGlobally: true,
-  // },
+  fakeTimers: {
+    enableGlobally: true,
+  },
   globals: {
     APP_PORT: 4000,
     ADMIN_ACCESS_TOKEN:
