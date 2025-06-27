@@ -24,7 +24,7 @@ import { WorkspaceSSOIdentityProvider } from 'src/engine/core-modules/sso/worksp
 import { UserWorkspace } from 'src/engine/core-modules/user-workspace/user-workspace.entity';
 import { AgentEntity } from 'src/engine/metadata-modules/agent/agent.entity';
 import { RoleDTO } from 'src/engine/metadata-modules/role/dtos/role.dto';
-import { TwoFactorPolicy } from 'src/engine/core-modules/two-factor-authentication/entities/two-factor-authentication-policy.entity';
+import { TwoFactorAuthenticationPolicy } from 'src/engine/core-modules/two-factor-authentication/entities/two-factor-authentication-policy.entity';
 
 registerEnumType(WorkspaceActivationStatus, {
   name: 'WorkspaceActivationStatus',
@@ -164,9 +164,9 @@ export class Workspace {
   @Column({ default: false })
   isCustomDomainEnabled: boolean;
 
-  @Field(() => TwoFactorPolicy, { nullable: true })
+  @Field(() => TwoFactorAuthenticationPolicy, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
-  twoFactorAuthenticationPolicy?: TwoFactorPolicy;
+  twoFactorAuthenticationPolicy?: TwoFactorAuthenticationPolicy;
 
   @Column({ nullable: true, type: 'uuid' })
   defaultRoleId: string | null;
