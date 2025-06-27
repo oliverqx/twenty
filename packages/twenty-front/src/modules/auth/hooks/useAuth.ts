@@ -77,9 +77,18 @@ import { iconsState } from 'twenty-ui/display';
 import { cookieStorage } from '~/utils/cookie-storage';
 import { getWorkspaceUrl } from '~/utils/getWorkspaceUrl';
 import { dynamicActivate } from '~/utils/i18n/dynamicActivate';
+import { availableWorkspacesState } from '@/auth/states/availableWorkspacesState';
+import { useSignUpInNewWorkspace } from '@/auth/sign-in-up/hooks/useSignUpInNewWorkspace';
+import {
+  countAvailableWorkspaces,
+  getFirstAvailableWorkspaces,
+} from '@/auth/utils/availableWorkspacesUtils';
+import { useRequestFreshCaptchaToken } from '@/captcha/hooks/useRequestFreshCaptchaToken';
+import { loginTokenState } from '../states/loginTokenState';
 
 export const useAuth = () => {
   const setTokenPair = useSetRecoilState(tokenPairState);
+  const setLoginToken = useSetRecoilState(loginTokenState);
   const setCurrentUser = useSetRecoilState(currentUserState);
   const setAvailableWorkspaces = useSetRecoilState(availableWorkspacesState);
   const setCurrentWorkspaceMember = useSetRecoilState(
@@ -114,7 +123,10 @@ export const useAuth = () => {
   const [getLoginTokenFromEmailVerificationToken] =
     useGetLoginTokenFromEmailVerificationTokenMutation();
   const [getCurrentUser] = useGetCurrentUserLazyQuery();
+  const [initiateTwoFactorAuthenticationProvisioning] = 
+    useInitiateTwoFactorAuthenticationProvisioningMutation()
 
+  const [getAuthTokensFromOtp] = useGetAuthTokensFromOtpMutation();
   const { isOnAWorkspace } = useIsCurrentLocationOnAWorkspace();
 
   const workspacePublicData = useRecoilValue(workspacePublicDataState);
@@ -368,6 +380,33 @@ export const useAuth = () => {
     [setTokenPair],
   );
 
+  const handleSetLoginToken = useCallback(
+    (token: AuthToken['token']) => {
+      setLoginToken(token);
+      cookieStorage.setItem('loginToken', JSON.stringify(token));
+    },
+    [setTokenPair],
+  );
+
+  const handleLoadWorkspaceAfterAuthentication = useCallback(
+    async (authTokens: AuthTokenPair) => {
+      handleSetAuthTokens(authTokens);
+
+      // TODO: We can't parallelize this yet because when loadCurrentUSer is loaded
+      // then UserProvider updates its children and PrefetchDataProvider is triggered
+      // which requires the correct metadata to be loaded (not the mocks)
+      await refreshObjectMetadataItems();
+      await loadCurrentUser();
+    },
+    [
+      getAuthTokensFromLoginToken,
+      loadCurrentUser,
+      origin,
+      handleSetAuthTokens,
+      refreshObjectMetadataItems 
+    ]
+  );
+
   const handleGetAuthTokensFromLoginToken = useCallback(
     async (loginToken: string) => {
       const getAuthTokensResult = await getAuthTokensFromLoginToken({
@@ -403,6 +442,44 @@ export const useAuth = () => {
       refreshObjectMetadataItems,
     ],
   );
+
+    const handleGetAuthTokensFromOTP = useCallback(
+    async (
+      otp: string, 
+      loginToken: string,
+      captchaToken?: string
+    ) => {
+      try {
+        const getAuthTokensFromOtpResult = await getAuthTokensFromOtp({
+          variables: {
+            captchaToken,
+            origin,
+            otp,
+            loginToken
+          }
+        });
+
+        if (isDefined(getAuthTokensFromOtpResult.errors)) {
+          throw getAuthTokensFromOtpResult.errors;
+        }
+  
+        if (!getAuthTokensFromOtpResult.data?.getAuthTokensFromOTP) {
+          throw new Error('No getAuthTokensFromLoginToken result');
+        }
+
+        handleLoadWorkspaceAfterAuthentication(
+          getAuthTokensFromOtpResult.data.getAuthTokensFromOTP.tokens
+        );
+      } catch (error) {
+
+      }
+    },
+    [
+      getAuthTokensFromOtp,
+      origin
+    ] 
+  )
+
 
   const handleCredentialsSignIn = useCallback(
     async (email: string, password: string, captchaToken?: string) => {
@@ -659,6 +736,7 @@ export const useAuth = () => {
     getLoginTokenFromEmailVerificationToken:
       handleGetLoginTokenFromEmailVerificationToken,
     getAuthTokensFromLoginToken: handleGetAuthTokensFromLoginToken,
+    getAuthTokensFromOTP: handleGetAuthTokensFromOTP,
 
     loadCurrentUser,
 
@@ -672,5 +750,6 @@ export const useAuth = () => {
     signInWithGoogle: handleGoogleLogin,
     signInWithMicrosoft: handleMicrosoftLogin,
     setAuthTokens: handleSetAuthTokens,
+    initiateTwoFactorAuthenticationProvisioning
   };
 };

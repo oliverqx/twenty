@@ -47,6 +47,11 @@ export class AuthGraphqlApiExceptionFilter implements ExceptionFilter {
           subCode: AuthExceptionCode.EMAIL_NOT_VERIFIED,
           userFriendlyMessage: t`Email is not verified.`,
         });
+      case AuthExceptionCode.TWO_FACTOR_AUTHENTICATION_PROVISION:
+      case AuthExceptionCode.TWO_FACTOR_AUTHENTICATION_VERIFICATION:
+        throw new ForbiddenError(exception.message, {
+          subCode: exception.code
+        });
       case AuthExceptionCode.UNAUTHENTICATED:
         throw new AuthenticationError(exception.message, {
           userFriendlyMessage: t`You must be authenticated to perform this action.`,

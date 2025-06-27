@@ -25,6 +25,8 @@ import { domainConfigurationState } from '@/domain-manager/states/domainConfigur
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isDefined } from 'twenty-shared/utils';
+import { isTwoFactorAuthenticationEnabledState } from '../states/isTwoFactorAuthenticationEnabledState';
+import { isTwoFactorAuthenticationGloballyEnforcedState } from '../states/isTwoFactorAuthenticationGloballyEnforcedState copy';
 
 export const ClientConfigProviderEffect = () => {
   const setIsAnalyticsEnabled = useSetRecoilState(isAnalyticsEnabledState);
@@ -91,6 +93,11 @@ export const ClientConfigProviderEffect = () => {
   const setCalendarBookingPageId = useSetRecoilState(
     calendarBookingPageIdState,
   );
+
+  const setIsTwoFactorAuthenticationEnabled = useSetRecoilState(
+    isTwoFactorAuthenticationEnabledState
+  )
+
 
   const { data, loading, error, fetchClientConfig } = useClientConfig();
 
@@ -171,6 +178,7 @@ export const ClientConfigProviderEffect = () => {
     setMicrosoftCalendarEnabled(data?.clientConfig?.isMicrosoftCalendarEnabled);
     setGoogleMessagingEnabled(data?.clientConfig?.isGoogleMessagingEnabled);
     setGoogleCalendarEnabled(data?.clientConfig?.isGoogleCalendarEnabled);
+    setIsTwoFactorAuthenticationEnabled(data?.clientConfig?.isTwoFactorAuthenticationEnabled);
     setIsAttachmentPreviewEnabled(
       data?.clientConfig?.isAttachmentPreviewEnabled,
     );

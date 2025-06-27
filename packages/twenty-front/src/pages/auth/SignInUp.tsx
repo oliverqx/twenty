@@ -30,6 +30,8 @@ import { useSearchParams } from 'react-router-dom';
 import { isDefined } from 'twenty-shared/utils';
 import { AnimatedEaseIn } from 'twenty-ui/utilities';
 import { PublicWorkspaceDataOutput } from '~/generated/graphql';
+import { SignInUpTwoFactorAuthenticationProvisioning } from '@/auth/sign-in-up/components/internal/SignInUpTwoFactorAuthenticationProvision';
+import { SignInUpTOTPVerification } from '@/auth/sign-in-up/components/internal/SignInUpTwoFactorAuthenticationVerification';
 
 const StandardContent = ({
   workspacePublicData,
@@ -90,6 +92,14 @@ export const SignInUp = () => {
       return t`Choose a Workspace`;
     }
 
+    if (signInUpStep === SignInUpStep.TwoFactorAuthenticationProvision) {
+      return t`Setup your 2FA`
+    }
+
+    if (signInUpStep === SignInUpStep.TwoFactorAuthenticationVerification) {
+      return t`Verify code from the app`
+    }
+
     const workspaceName = !isDefined(workspacePublicData?.displayName)
       ? DEFAULT_WORKSPACE_NAME
       : workspacePublicData?.displayName === ''
@@ -123,6 +133,19 @@ export const SignInUp = () => {
     ) {
       return <SignInUpSSOIdentityProviderSelection />;
     }
+
+    if (
+      signInUpStep === SignInUpStep.TwoFactorAuthenticationProvision
+    ) {
+      return <SignInUpTwoFactorAuthenticationProvisioning/>
+    }
+
+    if (
+      signInUpStep === SignInUpStep.TwoFactorAuthenticationVerification
+    ) {
+      return <SignInUpTOTPVerification/>
+    }
+
     if (isDefined(workspacePublicData) && isOnAWorkspace) {
       return (
         <>

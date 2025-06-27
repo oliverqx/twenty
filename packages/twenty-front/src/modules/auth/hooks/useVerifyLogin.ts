@@ -3,6 +3,7 @@ import { AppPath } from '@/types/AppPath';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { useLingui } from '@lingui/react/macro';
 import { useNavigateApp } from '~/hooks/useNavigateApp';
+import { AuthToken } from '~/generated/graphql';
 
 export const useVerifyLogin = () => {
   const { enqueueErrorSnackBar } = useSnackBar();
@@ -10,7 +11,7 @@ export const useVerifyLogin = () => {
   const { getAuthTokensFromLoginToken } = useAuth();
   const { t } = useLingui();
 
-  const verifyLoginToken = async (loginToken: string) => {
+  const verifyLoginToken = async (loginToken: AuthToken['token']) => {
     try {
       await getAuthTokensFromLoginToken(loginToken);
     } catch (error) {
