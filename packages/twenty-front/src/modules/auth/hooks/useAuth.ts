@@ -26,6 +26,9 @@ import {
   useSignInMutation,
   useSignUpInWorkspaceMutation,
   useSignUpMutation,
+  useInitiateTwoFactorAuthenticationProvisioningMutation,
+  AuthToken,
+  useGetAuthTokensFromOtpMutation,
 } from '~/generated-metadata/graphql';
 
 import { currentWorkspaceMembersState } from '@/auth/states/currentWorkspaceMembersStates';
@@ -126,6 +129,9 @@ export const useAuth = () => {
   const [initiateTwoFactorAuthenticationProvisioning] = 
     useInitiateTwoFactorAuthenticationProvisioningMutation()
 
+  const [initiateTwoFactorAuthenticationProvisioning] =
+    useInitiateTwoFactorAuthenticationProvisioningMutation();
+  const [getCurrentUser] = useGetCurrentUserLazyQuery();
   const [getAuthTokensFromOtp] = useGetAuthTokensFromOtpMutation();
   const { isOnAWorkspace } = useIsCurrentLocationOnAWorkspace();
 
@@ -385,7 +391,7 @@ export const useAuth = () => {
       setLoginToken(token);
       cookieStorage.setItem('loginToken', JSON.stringify(token));
     },
-    [setTokenPair],
+    [setLoginToken],
   );
 
   const handleLoadWorkspaceAfterAuthentication = useCallback(
@@ -409,6 +415,7 @@ export const useAuth = () => {
 
   const handleGetAuthTokensFromLoginToken = useCallback(
     async (loginToken: string) => {
+    try {
       const getAuthTokensResult = await getAuthTokensFromLoginToken({
         variables: {
           loginToken,
@@ -433,13 +440,34 @@ export const useAuth = () => {
       // which requires the correct metadata to be loaded (not the mocks)
       await refreshObjectMetadataItems();
       await loadCurrentUser();
+    } catch (error) {
+        if (
+          error instanceof ApolloError &&
+          error.graphQLErrors[0]?.extensions?.subCode ===
+            'TWO_FACTOR_AUTHENTICATION_PROVISION'
+        ) {
+          setSignInUpStep(SignInUpStep.TwoFactorAuthenticationProvision);
+          throw error;
+        }
+
+        if (
+          error instanceof ApolloError &&
+          error.graphQLErrors[0]?.extensions?.subCode ===
+            'TWO_FACTOR_AUTHENTICATION_VERIFICATION'
+        ) {
+          setSignInUpStep(SignInUpStep.TwoFactorAuthenticationVerification);
+          throw error;
+        }
+      }
     },
     [
+      handleSetLoginToken,
       getAuthTokensFromLoginToken,
       loadCurrentUser,
       origin,
       handleSetAuthTokens,
       refreshObjectMetadataItems,
+      setSignInUpStep
     ],
   );
 

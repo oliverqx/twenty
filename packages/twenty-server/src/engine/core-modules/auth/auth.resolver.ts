@@ -296,14 +296,6 @@ export class AuthResolver {
       user.id,
       twoFactorAuthenticationVerificationInput.otp,
       workspace.id,
-    )
-
-    const loginToken = await this.loginTokenService.generateLoginToken(
-      user.email,
-      workspace.id,
-      // email validation is active only for password flow
-      AuthProviderEnum.Password,
-      false
     );
 
     return await this.authService.verify(email, workspace.id, authProvider);

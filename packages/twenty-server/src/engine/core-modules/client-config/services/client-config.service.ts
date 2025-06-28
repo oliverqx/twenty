@@ -146,6 +146,9 @@ export class ClientConfigService {
       calendarBookingPageId: this.twentyConfigService.get(
         'CALENDAR_BOOKING_PAGE_ID',
       ),
+      isTwoFactorAuthenticationEnabled: this.twentyConfigService.get(
+        'IS_TWO_FACTOR_AUTHENTICATION_ENABLED',
+      ),
     };
 
     return clientConfig;

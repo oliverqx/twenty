@@ -477,17 +477,18 @@ export class UserWorkspaceService extends TypeOrmQueryService<UserWorkspace> {
   }
 
   async findCurrentUserWorkspace(email: string, workspaceId: string) {
-    const workspaces = await this.userWorkspaceRepository.find({ 
+    const workspaces = await this.userWorkspaceRepository.find({
       where: {
         user: {
-          email
-        }, 
-        workspaceId
+          email,
+        },
+        workspaceId,
       },
       relations: {
-        twoFactorMethods: true
-      }
-    })
-    return workspaces
+        twoFactorMethods: true,
+      },
+    });
+
+    return workspaces;
   }
 }

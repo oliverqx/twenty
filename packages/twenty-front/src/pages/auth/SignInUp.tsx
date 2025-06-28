@@ -134,16 +134,12 @@ export const SignInUp = () => {
       return <SignInUpSSOIdentityProviderSelection />;
     }
 
-    if (
-      signInUpStep === SignInUpStep.TwoFactorAuthenticationProvision
-    ) {
-      return <SignInUpTwoFactorAuthenticationProvisioning/>
+    if (signInUpStep === SignInUpStep.TwoFactorAuthenticationProvision) {
+      return <SignInUpTwoFactorAuthenticationProvisioning />;
     }
 
-    if (
-      signInUpStep === SignInUpStep.TwoFactorAuthenticationVerification
-    ) {
-      return <SignInUpTOTPVerification/>
+    if (signInUpStep === SignInUpStep.TwoFactorAuthenticationVerification) {
+      return <SignInUpTOTPVerification />;
     }
 
     if (isDefined(workspacePublicData) && isOnAWorkspace) {

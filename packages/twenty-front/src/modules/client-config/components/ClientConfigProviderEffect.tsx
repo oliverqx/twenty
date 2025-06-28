@@ -218,6 +218,7 @@ export const ClientConfigProviderEffect = () => {
     setIsAttachmentPreviewEnabled,
     setIsConfigVariablesInDbEnabled,
     setCalendarBookingPageId,
+    setIsTwoFactorAuthenticationEnabled
   ]);
 
   return <></>;
