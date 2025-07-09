@@ -178,7 +178,9 @@ export const ClientConfigProviderEffect = () => {
     setMicrosoftCalendarEnabled(data?.clientConfig?.isMicrosoftCalendarEnabled);
     setGoogleMessagingEnabled(data?.clientConfig?.isGoogleMessagingEnabled);
     setGoogleCalendarEnabled(data?.clientConfig?.isGoogleCalendarEnabled);
-    setIsTwoFactorAuthenticationEnabled(data?.clientConfig?.isTwoFactorAuthenticationEnabled);
+    setIsTwoFactorAuthenticationEnabled(
+      data?.clientConfig?.isTwoFactorAuthenticationEnabled,
+    );
     setIsAttachmentPreviewEnabled(
       data?.clientConfig?.isAttachmentPreviewEnabled,
     );

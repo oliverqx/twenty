@@ -185,7 +185,4 @@ export class ClientConfig {
 
   @Field(() => Boolean)
   isTwoFactorAuthenticationEnabled: boolean;
-
-  @Field(() => Boolean)
-  isTwoFactorAuthenticationGloballyEnforced: boolean;
 }
